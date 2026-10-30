@@ -1,10 +1,15 @@
 package edu.altair.api_crm_altair.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -45,4 +50,7 @@ public class Modulo
     
     @Column(name = "creditos")
     private int creditos;
+    
+//    @ManyToMany(mappedBy = "modulos", fetch = FetchType.LAZY)
+//    private Set<Profesor> profesores = new HashSet<>();
 }

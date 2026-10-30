@@ -117,6 +117,7 @@ public class ModuloServiceImpl implements ModuloService
     // Método auxiliar de mapeo de Entidad a DTO
     private ModuloResponseDto mapToResponseDto(Modulo mod) {
         return new ModuloResponseDto(
+        		mod.getIdModulo(),
         		mod.getCodigo(),
         		mod.getDiminutivo(),
         		mod.getNombre(),

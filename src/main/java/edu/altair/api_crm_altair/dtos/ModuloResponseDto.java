@@ -1,6 +1,7 @@
 package edu.altair.api_crm_altair.dtos;
 
 public record ModuloResponseDto(
+		Long id,
 	    int codigo,
 	    String diminutivo,
 	    String nombre,

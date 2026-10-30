@@ -12,6 +12,21 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler 
 {
 	// Manejo de Error 404 - Recurso no encontrado
+	 @ExceptionHandler(EntityNotFoundException.class)
+	 public ProblemDetail manejarEntityNoEncontrado(EntityNotFoundException ex) {
+		 
+		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+			 HttpStatus.NOT_FOUND,
+			 ex.getMessage()
+		 );
+		 
+		 problem.setTitle("Entidad No Encontrada");
+		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+		 problem.setProperty("timestamp", Instant.now());
+		 return problem;
+	 }
+	 
+	// Manejo de Error 404 - Recurso no encontrado
 	 @ExceptionHandler(DepartamentoNotFoundException.class)
 	 public ProblemDetail manejarDepartamentoNoEncontrado(DepartamentoNotFoundException ex) {
 		 

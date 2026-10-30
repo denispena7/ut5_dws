@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.altair.api_crm_altair.dtos.DepartamentoResponseDto;
 import edu.altair.api_crm_altair.dtos.ProfesorRequestDto;
 import edu.altair.api_crm_altair.dtos.ProfesorResponseDto;
 import edu.altair.api_crm_altair.entities.Departamento;
@@ -107,14 +108,20 @@ public class ProfesorServiceImpl implements ProfesorService
     // Método auxiliar de mapeo de Entidad a DTO
     private ProfesorResponseDto mapToResponseDto(Profesor profesor) {
         return new ProfesorResponseDto(
+        		profesor.getIdProfesor(),
         		profesor.getNombre(),
                 profesor.getApellidos(),
                 profesor.getDni(),
                 profesor.getEmail_centro(),
                 profesor.getEmail_personal(),
                 profesor.getTelefono_personal(),
-                profesor.getDepartamento().getNombre()
-                // departamento del profesor
+               
+                new DepartamentoResponseDto(
+                        profesor.getDepartamento().getCodigo(),
+                        profesor.getDepartamento().getNombre(),
+                        profesor.getDepartamento().getDescripcion(),
+                        profesor.getDepartamento().getTelefono()
+                )
         );
     }
 }
