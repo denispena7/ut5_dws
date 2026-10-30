@@ -101,6 +101,21 @@ public class GlobalExceptionHandler
 		 return problem;
 	 }
 	 
+		// Manejo de Error 404 - Recurso no encontrado
+	 @ExceptionHandler(ProfesorNotFoundException.class)
+	 public ProblemDetail manejarFamiliaNoEncontrado(ProfesorNotFoundException ex) {
+		 
+		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+			 HttpStatus.NOT_FOUND,
+			 ex.getMessage()
+		 );
+		 
+		 problem.setTitle("Profesor No Encontrado");
+		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+		 problem.setProperty("timestamp", Instant.now());
+		 return problem;
+	 }
+	 
 	// Manejo de Error 409 - Conflicto de duplicidad de codigo
 	 @ExceptionHandler(CodigoAlreadyExistsException.class)
 	 public ProblemDetail manejarCodigoDuplicado(CodigoAlreadyExistsException ex) 
@@ -119,6 +134,21 @@ public class GlobalExceptionHandler
 	// Manejo de Error 409 - Conflicto de duplicidad de diminutivo
 	 @ExceptionHandler(DiminutivoAlreadyExistsException.class)
 	 public ProblemDetail manejarDiminutivoDuplicado(DiminutivoAlreadyExistsException ex) 
+	 {
+		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+			 HttpStatus.CONFLICT,
+			 ex.getMessage()
+		 );
+		 
+		 problem.setTitle("Conflicto de Datos");
+		 problem.setType(URI.create("https://api.crm.altair.edu/errors/conflict"));
+		 problem.setProperty("timestamp", Instant.now());
+		 return problem;
+	 }
+	 
+		// Manejo de Error 409 - Conflicto de duplicidad de codigo
+	 @ExceptionHandler(DniAlreadyExistsException.class)
+	 public ProblemDetail manejarCodigoDuplicado(DniAlreadyExistsException ex) 
 	 {
 		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
 			 HttpStatus.CONFLICT,
