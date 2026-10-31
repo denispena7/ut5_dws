@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.CursoRequestDto;
-import edu.altair.api_crm_altair.dtos.CursoResponseDto;
-import edu.altair.api_crm_altair.dtos.TitulacionResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.CursoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.CursoResponseDto;
+import edu.altair.api_crm_altair.dtos.responses.TitulacionResponseDto;
 import edu.altair.api_crm_altair.entities.Curso;
 import edu.altair.api_crm_altair.entities.Titulacion;
-import edu.altair.api_crm_altair.exceptions.CursoNotFoundException;
-import edu.altair.api_crm_altair.exceptions.DiminutivoAlreadyExistsException;
 import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
+import edu.altair.api_crm_altair.exceptions.PropertyAlreadyExistsException;
 import edu.altair.api_crm_altair.repositories.CursoRepository;
 import edu.altair.api_crm_altair.repositories.TitulacionRepository;
 import edu.altair.api_crm_altair.services.CursoService;
@@ -40,7 +39,7 @@ public class CursoServiceImpl implements CursoService
 	public CursoResponseDto obtenerPorId(Long id) 
 	{
         Curso curso = cursoRepository.findById(id)
-                .orElseThrow(() -> new CursoNotFoundException("Curso no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con el ID: " + id));
         return mapToResponseDto(curso);
 	}
 
@@ -49,7 +48,7 @@ public class CursoServiceImpl implements CursoService
 	public CursoResponseDto obtenerPorDiminutivo(String diminutivo)
 	{
         Curso curso = cursoRepository.findByDiminutivo(diminutivo)
-                .orElseThrow(() -> new CursoNotFoundException("Curso no encontrado por el diminutivo: " + diminutivo));
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado por el diminutivo: " + diminutivo));
         return mapToResponseDto(curso);
 	}
 
@@ -59,7 +58,7 @@ public class CursoServiceImpl implements CursoService
 	{
 		// Validación de regla de negocio: codigo único
 		 if (cursoRepository.existsByDiminutivo(dto.diminutivo())) {
-			 throw new DiminutivoAlreadyExistsException("Ya existe un curso registrado con el diminutivo: " + dto.diminutivo());
+			 throw new PropertyAlreadyExistsException("Ya existe un curso registrado con el diminutivo: " + dto.diminutivo());
 		 }
 		 
 		Titulacion titulacion = titRepository.findByCodigo(dto.codigoTitulacion())
@@ -81,7 +80,7 @@ public class CursoServiceImpl implements CursoService
 	public CursoResponseDto actualizar(Long id, CursoRequestDto dto) 
 	{
         Curso cursoExistente = cursoRepository.findById(id)
-                .orElseThrow(() -> new CursoNotFoundException("Curso no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Curso no encontrado con el ID: " + id));
 
         cursoExistente.setDiminutivo(dto.diminutivo());
         cursoExistente.setDescripcion(dto.descripcion());
@@ -96,7 +95,7 @@ public class CursoServiceImpl implements CursoService
 	{
 		if (!cursoRepository.existsById(id)) 
 		{
-			throw new CursoNotFoundException("Imposible eliminar. Curso no encontrado con el ID: " + id);
+			throw new EntityNotFoundException("Imposible eliminar. Curso no encontrado con el ID: " + id);
 		}
 		
 		cursoRepository.deleteById(id);	

@@ -5,24 +5,20 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.TitulacionRequestDto;
-import edu.altair.api_crm_altair.dtos.TitulacionResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.TitulacionRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.TitulacionResponseDto;
 import edu.altair.api_crm_altair.entities.Titulacion;
-import edu.altair.api_crm_altair.exceptions.CodigoAlreadyExistsException;
-import edu.altair.api_crm_altair.exceptions.TitulacionNotFoundException;
+import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
+import edu.altair.api_crm_altair.exceptions.PropertyAlreadyExistsException;
 import edu.altair.api_crm_altair.repositories.TitulacionRepository;
 import edu.altair.api_crm_altair.services.TitulacionService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class TitulacionServiceImpl implements TitulacionService 
 {
 	private final TitulacionRepository titulacionRepository;
-
-    // Inyección de dependencias por constructor
-    public TitulacionServiceImpl(TitulacionRepository titulacionRepository) 
-    {
-        this.titulacionRepository = titulacionRepository;
-    }
     
 	@Override
 	@Transactional(readOnly = true)
@@ -39,7 +35,7 @@ public class TitulacionServiceImpl implements TitulacionService
 	public TitulacionResponseDto obtenerPorId(Long id) 
 	{
         Titulacion titulacion = titulacionRepository.findById(id)
-                .orElseThrow(() -> new TitulacionNotFoundException("Titulacion no encontrada con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Titulacion no encontrada con el ID: " + id));
         return mapToResponseDto(titulacion);
 	}
 
@@ -48,7 +44,7 @@ public class TitulacionServiceImpl implements TitulacionService
 	public TitulacionResponseDto obtenerPorCodigo(int codigo) 
 	{
         Titulacion titulacion = titulacionRepository.findByCodigo(codigo)
-                .orElseThrow(() -> new TitulacionNotFoundException("Titulacion no encontrado con el codigo: " + codigo));
+                .orElseThrow(() -> new EntityNotFoundException("Titulacion no encontrado con el codigo: " + codigo));
         return mapToResponseDto(titulacion);
 	}
 
@@ -57,7 +53,7 @@ public class TitulacionServiceImpl implements TitulacionService
 	public TitulacionResponseDto obtenerPorDiminutivo(String diminutivo) 
 	{
         Titulacion titulacion = titulacionRepository.findByDiminutivo(diminutivo)
-                .orElseThrow(() -> new TitulacionNotFoundException("Titulacion no encontrado por el diminutivo: " + diminutivo));
+                .orElseThrow(() -> new EntityNotFoundException("Titulacion no encontrado por el diminutivo: " + diminutivo));
         return mapToResponseDto(titulacion);
 	}
 
@@ -67,7 +63,7 @@ public class TitulacionServiceImpl implements TitulacionService
 	{
 		// Validación de regla de negocio: codigo único
 		 if  (titulacionRepository.existsByCodigo(dto.codigo())) {
-			 throw new CodigoAlreadyExistsException("Ya existe una titulacion registrada con el codigo: " + dto.codigo());
+			 throw new PropertyAlreadyExistsException("Ya existe una titulacion registrada con el codigo: " + dto.codigo());
 		 }
 		 
        Titulacion nuevaTitulacion = new Titulacion(
@@ -86,7 +82,7 @@ public class TitulacionServiceImpl implements TitulacionService
 	public TitulacionResponseDto actualizar(Long id, TitulacionRequestDto dto) 
 	{
         Titulacion titulacionExistente = titulacionRepository.findById(id)
-                .orElseThrow(() -> new TitulacionNotFoundException("Titulacion no encontrada con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Titulacion no encontrada con el ID: " + id));
 
         titulacionExistente.setCodigo(dto.codigo());
         titulacionExistente.setDiminutivo(dto.diminutivo());
@@ -102,7 +98,7 @@ public class TitulacionServiceImpl implements TitulacionService
 	{
 		if (!titulacionRepository.existsById(id)) 
 		{
-			throw new TitulacionNotFoundException("Imposible eliminar. Titulacion no encontrada con el ID: " + id);
+			throw new EntityNotFoundException("Imposible eliminar. Titulacion no encontrada con el ID: " + id);
 		}
 		
 		titulacionRepository.deleteById(id);	 

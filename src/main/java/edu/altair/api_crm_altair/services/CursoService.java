@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.CursoRequestDto;
-import edu.altair.api_crm_altair.dtos.CursoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.CursoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.CursoResponseDto;
 
 public interface CursoService 
 {

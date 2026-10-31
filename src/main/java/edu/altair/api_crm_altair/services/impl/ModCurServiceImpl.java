@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.CursoResponseDto;
-import edu.altair.api_crm_altair.dtos.ModuloResponseDto;
-import edu.altair.api_crm_altair.dtos.TitulacionResponseDto;
 import edu.altair.api_crm_altair.dtos.requests.ModCurRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.CursoResponseDto;
 import edu.altair.api_crm_altair.dtos.responses.CursosModuloResponseDto;
+import edu.altair.api_crm_altair.dtos.responses.ModuloResponseDto;
 import edu.altair.api_crm_altair.dtos.responses.ModulosCursoResponseDto;
+import edu.altair.api_crm_altair.dtos.responses.TitulacionResponseDto;
 import edu.altair.api_crm_altair.entities.Curso;
 import edu.altair.api_crm_altair.entities.ModCur;
 import edu.altair.api_crm_altair.entities.Modulo;

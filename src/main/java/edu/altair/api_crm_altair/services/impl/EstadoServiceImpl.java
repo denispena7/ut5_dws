@@ -5,23 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.EstadoRequestDto;
-import edu.altair.api_crm_altair.dtos.EstadoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.EstadoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.EstadoResponseDto;
 import edu.altair.api_crm_altair.entities.Estado;
-import edu.altair.api_crm_altair.exceptions.EstadoNotFoundException;
+import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
 import edu.altair.api_crm_altair.repositories.EstadoRepository;
 import edu.altair.api_crm_altair.services.EstadoService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class EstadoServiceImpl implements EstadoService 
 {
 	private final EstadoRepository estadoRepository;
-
-    // Inyección de dependencias por constructor
-    public EstadoServiceImpl(EstadoRepository estadoRepository) 
-    {
-        this.estadoRepository = estadoRepository;
-    }
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -38,7 +34,7 @@ public class EstadoServiceImpl implements EstadoService
 	public EstadoResponseDto obtenerPorId(Long id) 
 	{
         Estado modulo = estadoRepository.findById(id)
-                .orElseThrow(() -> new EstadoNotFoundException("Estado no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Estado no encontrado con el ID: " + id));
         return mapToResponseDto(modulo);
 	}
 
@@ -61,7 +57,7 @@ public class EstadoServiceImpl implements EstadoService
 	public EstadoResponseDto actualizar(Long id, EstadoRequestDto dto) 
 	{
         Estado estadoExistente = estadoRepository.findById(id)
-                .orElseThrow(() -> new EstadoNotFoundException("Estado no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Estado no encontrado con el ID: " + id));
 
         estadoExistente.setNombre(dto.nombre());
         estadoExistente.setDescripcion(dto.descripcion());
@@ -76,7 +72,7 @@ public class EstadoServiceImpl implements EstadoService
 	{
 		if (!estadoRepository.existsById(id)) 
 		{
-			throw new EstadoNotFoundException("Imposible eliminar. Estado no encontrado con el ID: " + id);
+			throw new EntityNotFoundException("Imposible eliminar. Estado no encontrado con el ID: " + id);
 		}
 		
 		estadoRepository.deleteById(id);	

@@ -13,34 +13,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.altair.api_crm_altair.dtos.EstadoRequestDto;
-import edu.altair.api_crm_altair.dtos.EstadoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.EstadoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.EstadoResponseDto;
 import edu.altair.api_crm_altair.services.EstadoService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/estado")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/estado")
 public class EstadoController 
 {
 	private final EstadoService estadoService;
-
-    public EstadoController(EstadoService estadoService) 
-    {
-        this.estadoService = estadoService;
-    }
     
- // 1. READ ALL - GET /api/estado
+ // 1. READ ALL - GET /api/v1/estado
     @GetMapping
     public ResponseEntity<List<EstadoResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(estadoService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/estado/{id}
+    // 2. READ BY ID - GET /api/v1/estado/{id}
     @GetMapping("/{id}")
     public ResponseEntity<EstadoResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(estadoService.obtenerPorId(id)); // HTTP 200 OK
     }
 
-    // 3. CREATE - POST /api/estado
+    // 3. CREATE - POST /api/v1/estado
     @PostMapping
     public ResponseEntity<EstadoResponseDto> crear(@RequestBody EstadoRequestDto dto) {
         EstadoResponseDto creado = estadoService.crear(dto);
@@ -49,7 +46,7 @@ public class EstadoController
                 .body(creado);
     }
 
-    // 4. UPDATE - PUT /api/estado/{id}
+    // 4. UPDATE - PUT /api/v1/estado/{id}
     @PutMapping("/{id}")
     public ResponseEntity<EstadoResponseDto> actualizar(
             @PathVariable Long id,
@@ -58,7 +55,7 @@ public class EstadoController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 5. DELETE - DELETE /api/estado/{id}
+    // 5. DELETE - DELETE /api/v1/estado/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         estadoService.eliminar(id);

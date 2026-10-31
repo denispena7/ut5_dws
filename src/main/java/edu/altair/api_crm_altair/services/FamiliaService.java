@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.FamiliaRequestDto;
-import edu.altair.api_crm_altair.dtos.FamiliaResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.FamiliaRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.FamiliaResponseDto;
 
 public interface FamiliaService 
 {

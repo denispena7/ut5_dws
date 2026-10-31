@@ -5,24 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.FamiliaRequestDto;
-import edu.altair.api_crm_altair.dtos.FamiliaResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.FamiliaRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.FamiliaResponseDto;
 import edu.altair.api_crm_altair.entities.Familia;
-import edu.altair.api_crm_altair.exceptions.FamiliaNotFoundException;
+import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
 import edu.altair.api_crm_altair.repositories.FamiliaRepository;
 import edu.altair.api_crm_altair.services.FamiliaService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class FamiliaServiceImpl implements FamiliaService 
 {
 	private final FamiliaRepository familiaRepository;
-
-    // Inyección de dependencias por constructor
-    public FamiliaServiceImpl(FamiliaRepository familiaRepository) 
-    {
-        this.familiaRepository = familiaRepository;
-    }
-	
 	@Override
 	@Transactional(readOnly = true)
 	public List<FamiliaResponseDto> obtenerTodos() 
@@ -38,7 +33,7 @@ public class FamiliaServiceImpl implements FamiliaService
 	public FamiliaResponseDto obtenerPorId(Long id) 
 	{
         Familia familia = familiaRepository.findById(id)
-                .orElseThrow(() -> new FamiliaNotFoundException("Familia no encontrada con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Familia no encontrada con el ID: " + id));
         return mapToResponseDto(familia);
 	}
 
@@ -79,7 +74,7 @@ public class FamiliaServiceImpl implements FamiliaService
 	public FamiliaResponseDto actualizar(Long id, FamiliaRequestDto dto)
 	{
         Familia familiaExistente = familiaRepository.findById(id)
-                .orElseThrow(() -> new FamiliaNotFoundException("Familia no encontrada con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Familia no encontrada con el ID: " + id));
 
         familiaExistente.setNombre_madre(dto.nombre_madre());
 		familiaExistente.setNombre_padre(dto.nombre_padre());
@@ -112,7 +107,7 @@ public class FamiliaServiceImpl implements FamiliaService
 	{
 		if (!familiaRepository.existsById(id)) 
 		{
-			throw new FamiliaNotFoundException("Imposible eliminar. Familia no encontrada con el ID: " + id);
+			throw new EntityNotFoundException("Imposible eliminar. Familia no encontrada con el ID: " + id);
 		}
 		
 		familiaRepository.deleteById(id);	
@@ -137,10 +132,10 @@ public class FamiliaServiceImpl implements FamiliaService
                 fam.getMunicipio_padre(),
                 fam.getProvincia_madre(),
                 fam.getProvincia_padre(),
-                fam.getSon_separados(),
-                fam.getEs_compartido(),
-                fam.getEs_madre(),
-                fam.getEs_padre()
+                fam.isSon_separados(),
+                fam.isEs_compartido(),
+                fam.isEs_madre(),
+                fam.isEs_padre()
         );
     }
 }

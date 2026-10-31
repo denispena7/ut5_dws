@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.EstadoRequestDto;
-import edu.altair.api_crm_altair.dtos.EstadoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.EstadoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.EstadoResponseDto;
 
 public interface EstadoService 
 {

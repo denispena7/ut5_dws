@@ -5,29 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.DepartamentoResponseDto;
-import edu.altair.api_crm_altair.dtos.ProfesorRequestDto;
-import edu.altair.api_crm_altair.dtos.ProfesorResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.ProfesorRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.DepartamentoResponseDto;
+import edu.altair.api_crm_altair.dtos.responses.ProfesorResponseDto;
 import edu.altair.api_crm_altair.entities.Departamento;
 import edu.altair.api_crm_altair.entities.Profesor;
-import edu.altair.api_crm_altair.exceptions.DniAlreadyExistsException;
-import edu.altair.api_crm_altair.exceptions.ProfesorNotFoundException;
+import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
+import edu.altair.api_crm_altair.exceptions.PropertyAlreadyExistsException;
 import edu.altair.api_crm_altair.repositories.DepartamentoRepository;
 import edu.altair.api_crm_altair.repositories.ProfesorRepository;
 import edu.altair.api_crm_altair.services.ProfesorService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ProfesorServiceImpl implements ProfesorService 
 {
 	 private final ProfesorRepository profesorRepository;
 	 private final DepartamentoRepository departamentoRepository;
-
-    // Inyección de dependencias por constructor
-    public ProfesorServiceImpl(ProfesorRepository profesorRepository, DepartamentoRepository depRepository) 
-    {
-        this.profesorRepository = profesorRepository;
-        departamentoRepository = depRepository;
-    }
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -44,7 +39,7 @@ public class ProfesorServiceImpl implements ProfesorService
 	public ProfesorResponseDto obtenerPorId(Long id) 
 	{
         Profesor profesor = profesorRepository.findById(id)
-                .orElseThrow(() -> new ProfesorNotFoundException("Profesor no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Profesor no encontrado con el ID: " + id));
         return mapToResponseDto(profesor);
 	}
 
@@ -54,11 +49,11 @@ public class ProfesorServiceImpl implements ProfesorService
 	{
 		// Validación de regla de negocio: codigo único
 		 if (profesorRepository.existsByDni(dto.dni())) {
-			 throw new DniAlreadyExistsException("Ya existe un profesor registrado con el dni: " + dto.dni());
+			 throw new PropertyAlreadyExistsException("Ya existe un profesor registrado con el dni: " + dto.dni());
 		 }
 	
 		 Departamento dep = departamentoRepository.findByCodigo(dto.codigoDepartamento())
-		            .orElseThrow(() -> new ProfesorNotFoundException("Departamento no encontrado"));
+		            .orElseThrow(() -> new EntityNotFoundException("Departamento no encontrado"));
 		 
 	      Profesor nuevoProfesor = new Profesor(
 	              null,
@@ -80,7 +75,7 @@ public class ProfesorServiceImpl implements ProfesorService
 	public ProfesorResponseDto actualizar(Long id, ProfesorRequestDto dto) 
 	{
         Profesor profesorExistente = profesorRepository.findById(id)
-                .orElseThrow(() -> new ProfesorNotFoundException("Profesor no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Profesor no encontrado con el ID: " + id));
 
         profesorExistente.setNombre(dto.nombre());
         profesorExistente.setApellidos(dto.apellidos());
@@ -99,7 +94,7 @@ public class ProfesorServiceImpl implements ProfesorService
 	{
 		if (!profesorRepository.existsById(id)) 
 		{
-			throw new ProfesorNotFoundException("Imposible eliminar. Profesor no encontrado con el ID: " + id);
+			throw new EntityNotFoundException("Imposible eliminar. Profesor no encontrado con el ID: " + id);
 		}
 		
 		profesorRepository.deleteById(id);	

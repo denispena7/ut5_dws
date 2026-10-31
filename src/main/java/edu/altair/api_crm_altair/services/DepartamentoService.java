@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.DepartamentoRequestDto;
-import edu.altair.api_crm_altair.dtos.DepartamentoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.DepartamentoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.DepartamentoResponseDto;
 
 public interface DepartamentoService 
 {

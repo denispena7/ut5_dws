@@ -73,14 +73,14 @@ public class Familia
     private String provincia_padre;
     
     @Column(name = "son_separados", nullable = false)
-    private Boolean son_separados;
+    private boolean son_separados;
     
     @Column(name = "es_compartido", nullable = false)
-    private Boolean es_compartido;
+    private boolean es_compartido;
     
     @Column(name = "es_madre", nullable = false)
-    private Boolean es_madre;
+    private boolean es_madre;
     
     @Column(name = "es_padre", nullable = false)
-    private Boolean es_padre;
+    private boolean es_padre;
 }

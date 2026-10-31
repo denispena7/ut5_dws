@@ -13,38 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.altair.api_crm_altair.dtos.DepartamentoRequestDto;
-import edu.altair.api_crm_altair.dtos.DepartamentoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.DepartamentoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.DepartamentoResponseDto;
 import edu.altair.api_crm_altair.services.DepartamentoService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/departamento")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/departamento")
 public class DepartamentoController 
 {
 	private final DepartamentoService departamentoService;
 
-    public DepartamentoController(DepartamentoService departamentoService) {
-        this.departamentoService = departamentoService;
-    }
-
-    // 1. READ ALL - GET /api/departamento
+    // 1. READ ALL - GET /api/v1/departamento
     @GetMapping
     public ResponseEntity<List<DepartamentoResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(departamentoService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/departamento/{id}
+    // 2. READ BY ID - GET /api/v1/departamento/{id}
     @GetMapping("/{id}")
     public ResponseEntity<DepartamentoResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(departamentoService.obtenerPorId(id)); // HTTP 200 OK
     }
-    // 3. READ BY CODIGO - GET /api/departamento/{cod}
-    @GetMapping("/{cod}")
+    // 3. READ BY CODIGO - GET /api/v1/departamento/cod/{cod}
+    @GetMapping("cod/{cod}")
     public ResponseEntity<DepartamentoResponseDto> obtenerPorCodigo(@PathVariable int cod) {
         return ResponseEntity.ok(departamentoService.obtenerPorCodigo(cod)); // HTTP 200 OK
     }
 
-    // 4. CREATE - POST /api/departamento
+    // 4. CREATE - POST /api/v1/departamento
     @PostMapping
     public ResponseEntity<DepartamentoResponseDto> crear(@RequestBody DepartamentoRequestDto requestDto) {
         DepartamentoResponseDto creado = departamentoService.crear(requestDto);
@@ -53,7 +51,7 @@ public class DepartamentoController
                 .body(creado);
     }
 
-    // 5. UPDATE - PUT /api/departamento/{id}
+    // 5. UPDATE - PUT /api/v1/departamento/{id}
     @PutMapping("/{id}")
     public ResponseEntity<DepartamentoResponseDto> actualizar(
             @PathVariable Long id,
@@ -62,7 +60,7 @@ public class DepartamentoController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 6. DELETE - DELETE /api/departamento/{id}
+    // 6. DELETE - DELETE /api/v1/departamento/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         departamentoService.eliminar(id);

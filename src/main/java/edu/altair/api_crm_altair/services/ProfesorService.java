@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.ProfesorRequestDto;
-import edu.altair.api_crm_altair.dtos.ProfesorResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.ProfesorRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.ProfesorResponseDto;
 
 public interface ProfesorService
 {

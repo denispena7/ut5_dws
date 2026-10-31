@@ -13,45 +13,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.altair.api_crm_altair.dtos.TitulacionRequestDto;
-import edu.altair.api_crm_altair.dtos.TitulacionResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.TitulacionRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.TitulacionResponseDto;
 import edu.altair.api_crm_altair.services.TitulacionService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/titulacion")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/titulacion")
 public class TitulacionController 
 {
 	private final TitulacionService titulacionService;
-
-    public TitulacionController(TitulacionService titulacionService) {
-        this.titulacionService = titulacionService;
-    }
     
- // 1. READ ALL - GET /api/titulacion
+ // 1. READ ALL - GET /api/v1/titulacion
     @GetMapping
     public ResponseEntity<List<TitulacionResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(titulacionService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/titulacion/{id}
+    // 2. READ BY ID - GET /api/v1/titulacion/{id}
     @GetMapping("/{id}")
     public ResponseEntity<TitulacionResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(titulacionService.obtenerPorId(id)); // HTTP 200 OK
     }
     
-    // 3. READ BY CODIGO - GET /api/modulo/{cod}
-    @GetMapping("/{cod}")
+    // 3. READ BY CODIGO - GET /api/v1/titulacion/{cod}
+    @GetMapping("/cod/{cod}")
     public ResponseEntity<TitulacionResponseDto> obtenerPorCodigo(@PathVariable int cod) {
         return ResponseEntity.ok(titulacionService.obtenerPorCodigo(cod)); // HTTP 200 OK
     }
     
-    // 4. READ BY CODIGO - GET /api/modulo/{diminutivo}
-    @GetMapping("/{diminutivo}")
+    // 4. READ BY CODIGO - GET /api/v1/titulacion/{diminutivo}
+    @GetMapping("/dim/{diminutivo}")
     public ResponseEntity<TitulacionResponseDto> obtenerPorDiminutivo(@PathVariable String diminutivo) {
         return ResponseEntity.ok(titulacionService.obtenerPorDiminutivo(diminutivo)); // HTTP 200 OK
     }
 
-    // 5. CREATE - POST /api/modulo
+    // 5. CREATE - POST /api/v1/titulacion
     @PostMapping
     public ResponseEntity<TitulacionResponseDto> crear(@RequestBody TitulacionRequestDto requestDto) {
         TitulacionResponseDto creado = titulacionService.crear(requestDto);
@@ -60,7 +58,7 @@ public class TitulacionController
                 .body(creado);
     }
 
-    // 6. UPDATE - PUT /api/modulo/{id}
+    // 6. UPDATE - PUT /api/v1/titulacion/{id}
     @PutMapping("/{id}")
     public ResponseEntity<TitulacionResponseDto> actualizar(
             @PathVariable Long id,
@@ -69,7 +67,7 @@ public class TitulacionController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 7. DELETE - DELETE /api/modulo/{id}
+    // 7. DELETE - DELETE /api/v1/titulacion/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         titulacionService.eliminar(id);

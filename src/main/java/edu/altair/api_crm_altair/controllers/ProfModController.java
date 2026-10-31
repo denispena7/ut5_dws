@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.altair.api_crm_altair.dtos.ModulosProfesorResponseDto;
-import edu.altair.api_crm_altair.dtos.ProfModRequestDto;
-import edu.altair.api_crm_altair.dtos.ProfesoresModuloResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.ProfModRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.ModulosProfesorResponseDto;
+import edu.altair.api_crm_altair.dtos.responses.ProfesoresModuloResponseDto;
 import edu.altair.api_crm_altair.services.ProfModService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/modulo-profesor")
+@RequestMapping("/api/v1/modulo-profesor")
 public class ProfModController 
 {
 	private final ProfModService service;
 	
     // Obtener los profesores que imparten un módulo
-    @GetMapping("/modulo/{id}")
+    @GetMapping("/md/{id}")
     public ResponseEntity<ProfesoresModuloResponseDto> obtenerProfesoresXModulo(
             @PathVariable Long id) {
 
@@ -32,7 +32,7 @@ public class ProfModController
     }
 
     // Obtener los módulos que imparte un profesor
-    @GetMapping("/profesor/{id}")
+    @GetMapping("/pf/{id}")
     public ResponseEntity<ModulosProfesorResponseDto> obtenerModulosXProfesor(
             @PathVariable Long id) {
 

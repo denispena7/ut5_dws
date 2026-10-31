@@ -1,7 +1,6 @@
-package edu.altair.api_crm_altair.dtos;
+package edu.altair.api_crm_altair.dtos.requests;
 
-public record ModuloResponseDto(
-		Long id,
+public record ModuloRequestDto(
 	    int codigo,
 	    String diminutivo,
 	    String nombre,

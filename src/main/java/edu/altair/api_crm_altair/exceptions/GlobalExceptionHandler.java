@@ -27,128 +27,113 @@ public class GlobalExceptionHandler
 	 }
 	 
 	// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(DepartamentoNotFoundException.class)
-	 public ProblemDetail manejarDepartamentoNoEncontrado(DepartamentoNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Departamento No Encontrado");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(DepartamentoNotFoundException.class)
+//	 public ProblemDetail manejarDepartamentoNoEncontrado(DepartamentoNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Departamento No Encontrado");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
 		// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(ModuloNotFoundException.class)
-	 public ProblemDetail manejarModuloNoEncontrado(ModuloNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Modulo No Encontrado");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(ModuloNotFoundException.class)
+//	 public ProblemDetail manejarModuloNoEncontrado(ModuloNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Modulo No Encontrado");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
 		// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(CursoNotFoundException.class)
-	 public ProblemDetail manejarCursoNoEncontrado(CursoNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Curso No Encontrado");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(CursoNotFoundException.class)
+//	 public ProblemDetail manejarCursoNoEncontrado(CursoNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Curso No Encontrado");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
 		// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(EstadoNotFoundException.class)
-	 public ProblemDetail manejarEstadoNoEncontrado(EstadoNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Estado No Encontrado");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(EstadoNotFoundException.class)
+//	 public ProblemDetail manejarEstadoNoEncontrado(EstadoNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Estado No Encontrado");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
 		// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(TitulacionNotFoundException.class)
-	 public ProblemDetail manejarTitulacionNoEncontrado(TitulacionNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Titulacion No Encontrada");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(TitulacionNotFoundException.class)
+//	 public ProblemDetail manejarTitulacionNoEncontrado(TitulacionNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Titulacion No Encontrada");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
 		// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(FamiliaNotFoundException.class)
-	 public ProblemDetail manejarFamiliaNoEncontrado(FamiliaNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Familia No Encontrada");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(FamiliaNotFoundException.class)
+//	 public ProblemDetail manejarFamiliaNoEncontrado(FamiliaNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Familia No Encontrada");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
 		// Manejo de Error 404 - Recurso no encontrado
-	 @ExceptionHandler(ProfesorNotFoundException.class)
-	 public ProblemDetail manejarFamiliaNoEncontrado(ProfesorNotFoundException ex) {
-		 
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.NOT_FOUND,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Profesor No Encontrado");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
+//	 @ExceptionHandler(ProfesorNotFoundException.class)
+//	 public ProblemDetail manejarFamiliaNoEncontrado(ProfesorNotFoundException ex) {
+//		 
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.NOT_FOUND,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Profesor No Encontrado");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/not-found"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 	 
-	// Manejo de Error 409 - Conflicto de duplicidad de codigo
-	 @ExceptionHandler(CodigoAlreadyExistsException.class)
-	 public ProblemDetail manejarCodigoDuplicado(CodigoAlreadyExistsException ex) 
-	 {
-		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-			 HttpStatus.CONFLICT,
-			 ex.getMessage()
-		 );
-		 
-		 problem.setTitle("Conflicto de Datos");
-		 problem.setType(URI.create("https://api.crm.altair.edu/errors/conflict"));
-		 problem.setProperty("timestamp", Instant.now());
-		 return problem;
-	 }
-	 
-	// Manejo de Error 409 - Conflicto de duplicidad de diminutivo
-	 @ExceptionHandler(DiminutivoAlreadyExistsException.class)
-	 public ProblemDetail manejarDiminutivoDuplicado(DiminutivoAlreadyExistsException ex) 
+	 // Manejo de Error 409: Conflicto de duplicidad de propiedad
+	 @ExceptionHandler(PropertyAlreadyExistsException.class)
+	 public ProblemDetail manejarCodigoDuplicado(PropertyAlreadyExistsException ex) 
 	 {
 		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
 			 HttpStatus.CONFLICT,
@@ -162,8 +147,8 @@ public class GlobalExceptionHandler
 	 }
 	 
 		// Manejo de Error 409 - Conflicto de duplicidad de codigo
-	 @ExceptionHandler(DniAlreadyExistsException.class)
-	 public ProblemDetail manejarCodigoDuplicado(DniAlreadyExistsException ex) 
+	 @ExceptionHandler(EntityAlreadyExistsException.class)
+	 public ProblemDetail manejarCodigoDuplicado(EntityAlreadyExistsException ex) 
 	 {
 		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
 			 HttpStatus.CONFLICT,
@@ -175,4 +160,49 @@ public class GlobalExceptionHandler
 		 problem.setProperty("timestamp", Instant.now());
 		 return problem;
 	 }
+	 
+	// Manejo de Error 409 - Conflicto de duplicidad de codigo
+//	 @ExceptionHandler(CodigoAlreadyExistsException.class)
+//	 public ProblemDetail manejarCodigoDuplicado(CodigoAlreadyExistsException ex) 
+//	 {
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.CONFLICT,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Conflicto de Datos");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/conflict"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
+	 
+	// Manejo de Error 409 - Conflicto de duplicidad de diminutivo
+//	 @ExceptionHandler(DiminutivoAlreadyExistsException.class)
+//	 public ProblemDetail manejarDiminutivoDuplicado(DiminutivoAlreadyExistsException ex) 
+//	 {
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.CONFLICT,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Conflicto de Datos");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/conflict"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
+	 
+		// Manejo de Error 409 - Conflicto de duplicidad de codigo
+//	 @ExceptionHandler(DniAlreadyExistsException.class)
+//	 public ProblemDetail manejarCodigoDuplicado(DniAlreadyExistsException ex) 
+//	 {
+//		 ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+//			 HttpStatus.CONFLICT,
+//			 ex.getMessage()
+//		 );
+//		 
+//		 problem.setTitle("Conflicto de Datos");
+//		 problem.setType(URI.create("https://api.crm.altair.edu/errors/conflict"));
+//		 problem.setProperty("timestamp", Instant.now());
+//		 return problem;
+//	 }
 }

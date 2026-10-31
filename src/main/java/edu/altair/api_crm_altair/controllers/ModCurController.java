@@ -18,13 +18,13 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/curso-modulo")
+@RequestMapping("/api/v1/curso-modulo")
 public class ModCurController 
 {
 	private final ModCurService service;
 	
     // Obtener los profesores que imparten un módulo
-    @GetMapping("/modulo/{id}")
+    @GetMapping("/md/{id}")
     public ResponseEntity<CursosModuloResponseDto> obtenerCursosXModulo(
             @PathVariable Long id) {
 
@@ -32,7 +32,7 @@ public class ModCurController
     }
 
     // Obtener los módulos que pertenecientes a un curso
-    @GetMapping("/curso/{id}")
+    @GetMapping("/cur/{id}")
     public ResponseEntity<ModulosCursoResponseDto> obtenerModulosXCurso(
             @PathVariable Long id) {
 

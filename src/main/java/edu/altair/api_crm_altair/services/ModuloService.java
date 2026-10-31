@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.ModuloRequestDto;
-import edu.altair.api_crm_altair.dtos.ModuloResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.ModuloRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.ModuloResponseDto;
 
 public interface ModuloService 
 {

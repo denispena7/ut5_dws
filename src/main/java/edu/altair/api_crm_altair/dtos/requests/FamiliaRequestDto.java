@@ -1,6 +1,6 @@
-package edu.altair.api_crm_altair.dtos;
+package edu.altair.api_crm_altair.dtos.requests;
 
-public record FamiliaResponseDto(
+public record FamiliaRequestDto(
 	    String nombre_madre,
 	    String nombre_padre,
 	    String apellidos_madre,

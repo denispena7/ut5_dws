@@ -5,31 +5,25 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.AlumnoRequestDto;
-import edu.altair.api_crm_altair.dtos.AlumnoResponseDto;
-import edu.altair.api_crm_altair.dtos.FamiliaResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.AlumnoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.AlumnoResponseDto;
+import edu.altair.api_crm_altair.dtos.responses.FamiliaResponseDto;
 import edu.altair.api_crm_altair.entities.Alumno;
 import edu.altair.api_crm_altair.entities.Familia;
-import edu.altair.api_crm_altair.exceptions.DniAlreadyExistsException;
 import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
-import edu.altair.api_crm_altair.exceptions.FamiliaNotFoundException;
+import edu.altair.api_crm_altair.exceptions.PropertyAlreadyExistsException;
 import edu.altair.api_crm_altair.repositories.AlumnoRepository;
 import edu.altair.api_crm_altair.repositories.FamiliaRepository;
 import edu.altair.api_crm_altair.services.AlumnoService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AlumnoServiceImpl implements AlumnoService 
 {
 	 private final AlumnoRepository alumnoRepository;
 	 private final FamiliaRepository familiaRepository;
-
-   // Inyección de dependencias por constructor
-   public AlumnoServiceImpl(AlumnoRepository alumnoRepository, FamiliaRepository famRepository) 
-   {
-       this.alumnoRepository = alumnoRepository;
-       familiaRepository = famRepository;
-   }
-	
+	 
    @Override
    @Transactional(readOnly = true)
    public List<AlumnoResponseDto> obtenerTodos() {
@@ -57,7 +51,7 @@ public class AlumnoServiceImpl implements AlumnoService
 
        // Validación de DNI único
        if (alumnoRepository.existsByDni(dto.dni())) {
-           throw new DniAlreadyExistsException(
+           throw new PropertyAlreadyExistsException(
                    "Ya existe un alumno registrado con el DNI: " + dto.dni());
        }
 
@@ -95,7 +89,7 @@ public class AlumnoServiceImpl implements AlumnoService
 
        // Recuperar la familia actualizada
        Familia familia = familiaRepository.findById(dto.idFamilia())
-               .orElseThrow(() -> new FamiliaNotFoundException(
+               .orElseThrow(() -> new EntityNotFoundException(
                        "Familia no encontrada"));
 
        alumnoExistente.setNombre(dto.nombre());
@@ -152,10 +146,10 @@ public class AlumnoServiceImpl implements AlumnoService
                    familia.getMunicipio_padre(),
                    familia.getProvincia_madre(),
                    familia.getProvincia_padre(),
-                   familia.getSon_separados(),
-                   familia.getEs_compartido(),
-                   familia.getEs_madre(),
-                   familia.getEs_padre()
+                   familia.isSon_separados(),
+                   familia.isEs_compartido(),
+                   familia.isEs_madre(),
+                   familia.isEs_padre()
            );
        }
 

@@ -1,4 +1,4 @@
-package edu.altair.api_crm_altair.dtos;
+package edu.altair.api_crm_altair.dtos.requests;
 
 import java.time.LocalDate;
 

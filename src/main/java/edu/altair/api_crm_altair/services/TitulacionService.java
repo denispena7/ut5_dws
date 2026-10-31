@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.TitulacionRequestDto;
-import edu.altair.api_crm_altair.dtos.TitulacionResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.TitulacionRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.TitulacionResponseDto;
 
 public interface TitulacionService 
 {

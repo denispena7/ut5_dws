@@ -13,28 +13,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.altair.api_crm_altair.dtos.ProfesorRequestDto;
-import edu.altair.api_crm_altair.dtos.ProfesorResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.ProfesorRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.ProfesorResponseDto;
 import edu.altair.api_crm_altair.services.ProfesorService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/profesor")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/profesor")
 public class ProfesorController
 {
 	private final ProfesorService profesorService;
-
-    public ProfesorController(ProfesorService profesorService)
-    {
-        this.profesorService = profesorService;
-    }
     
-    // 1. READ ALL - GET /api/profesor
+    // 1. READ ALL - GET /api/v1/profesor
     @GetMapping
     public ResponseEntity<List<ProfesorResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(profesorService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/profesor/{id}
+    // 2. READ BY ID - GET /api/v1/profesor/{id}
     @GetMapping("/{id}")
     public ResponseEntity<ProfesorResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(profesorService.obtenerPorId(id)); // HTTP 200 OK

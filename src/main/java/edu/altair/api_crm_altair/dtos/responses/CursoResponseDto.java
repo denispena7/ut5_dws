@@ -1,4 +1,4 @@
-package edu.altair.api_crm_altair.dtos;
+package edu.altair.api_crm_altair.dtos.responses;
 
 public record CursoResponseDto(
 	    String diminutivo,

@@ -2,8 +2,8 @@ package edu.altair.api_crm_altair.services;
 
 import java.util.List;
 
-import edu.altair.api_crm_altair.dtos.AlumnoRequestDto;
-import edu.altair.api_crm_altair.dtos.AlumnoResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.AlumnoRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.AlumnoResponseDto;
 
 public interface AlumnoService 
 {

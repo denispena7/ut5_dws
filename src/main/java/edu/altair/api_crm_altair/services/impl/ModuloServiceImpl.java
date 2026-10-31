@@ -5,25 +5,21 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.altair.api_crm_altair.dtos.ModuloRequestDto;
-import edu.altair.api_crm_altair.dtos.ModuloResponseDto;
+import edu.altair.api_crm_altair.dtos.requests.ModuloRequestDto;
+import edu.altair.api_crm_altair.dtos.responses.ModuloResponseDto;
 import edu.altair.api_crm_altair.entities.Modulo;
-import edu.altair.api_crm_altair.exceptions.CodigoAlreadyExistsException;
-import edu.altair.api_crm_altair.exceptions.ModuloNotFoundException;
+import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
+import edu.altair.api_crm_altair.exceptions.PropertyAlreadyExistsException;
 import edu.altair.api_crm_altair.repositories.ModuloRepository;
 import edu.altair.api_crm_altair.services.ModuloService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ModuloServiceImpl implements ModuloService 
 {
 	 private final ModuloRepository moduloRepository;
-
-    // Inyección de dependencias por constructor
-    public ModuloServiceImpl(ModuloRepository moduloRepository) 
-    {
-        this.moduloRepository = moduloRepository;
-    }
-
+	 
 	@Override
 	@Transactional(readOnly = true)
 	public List<ModuloResponseDto> obtenerTodos() 
@@ -39,7 +35,7 @@ public class ModuloServiceImpl implements ModuloService
 	public ModuloResponseDto obtenerPorId(Long id) 
 	{
         Modulo modulo = moduloRepository.findById(id)
-                .orElseThrow(() -> new ModuloNotFoundException("Modulo no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Modulo no encontrado con el ID: " + id));
         return mapToResponseDto(modulo);
 	}
 
@@ -48,7 +44,7 @@ public class ModuloServiceImpl implements ModuloService
 	public ModuloResponseDto obtenerPorCodigo(int codigo) 
 	{
         Modulo modulo = moduloRepository.findByCodigo(codigo)
-                .orElseThrow(() -> new ModuloNotFoundException("Modulo no encontrado con el codigo: " + codigo));
+                .orElseThrow(() -> new EntityNotFoundException("Modulo no encontrado con el codigo: " + codigo));
         return mapToResponseDto(modulo);
 	}
 	
@@ -57,7 +53,7 @@ public class ModuloServiceImpl implements ModuloService
 	public ModuloResponseDto obtenerPorDiminutivo(String diminutivo) 
 	{
         Modulo modulo = moduloRepository.findByDiminutivo(diminutivo)
-                .orElseThrow(() -> new ModuloNotFoundException("Modulo no encontrado por el diminutivo: " + diminutivo));
+                .orElseThrow(() -> new EntityNotFoundException("Modulo no encontrado por el diminutivo: " + diminutivo));
         return mapToResponseDto(modulo);
 	}
 
@@ -67,7 +63,7 @@ public class ModuloServiceImpl implements ModuloService
 	{
 		// Validación de regla de negocio: codigo único
 		 if (moduloRepository.existsByCodigo(dto.codigo())) {
-			 throw new CodigoAlreadyExistsException("Ya existe un modulo registrado con el codigo: " + dto.codigo());
+			 throw new PropertyAlreadyExistsException("Ya existe un modulo registrado con el codigo: " + dto.codigo());
 		 }
 		 
         Modulo nuevoModulo = new Modulo(
@@ -89,7 +85,7 @@ public class ModuloServiceImpl implements ModuloService
 	public ModuloResponseDto actualizar(Long id, ModuloRequestDto dto) 
 	{
         Modulo moduloExistente = moduloRepository.findById(id)
-                .orElseThrow(() -> new ModuloNotFoundException("Modulo no encontrado con el ID: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Modulo no encontrado con el ID: " + id));
 
         moduloExistente.setCodigo(dto.codigo());
         moduloExistente.setDiminutivo(dto.diminutivo());
@@ -108,7 +104,7 @@ public class ModuloServiceImpl implements ModuloService
 	{
 		if (!moduloRepository.existsById(id)) 
 		{
-			throw new ModuloNotFoundException("Imposible eliminar. Modulo no encontrado con el ID: " + id);
+			throw new EntityNotFoundException("Imposible eliminar. Modulo no encontrado con el ID: " + id);
 		}
 		
 		moduloRepository.deleteById(id);	 

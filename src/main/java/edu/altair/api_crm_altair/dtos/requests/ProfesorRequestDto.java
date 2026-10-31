@@ -1,12 +1,11 @@
-package edu.altair.api_crm_altair.dtos;
+package edu.altair.api_crm_altair.dtos.requests;
 
-public record ProfesorResponseDto(
-		Long id,
+public record ProfesorRequestDto(
 	    String nombre,
 	    String apellidos,
 	    String dni,
 	    String email_centro,
 	    String email_personal,
 	    String telefono_personal,
-	    DepartamentoResponseDto departamento
+	    int codigoDepartamento
 ) {}
