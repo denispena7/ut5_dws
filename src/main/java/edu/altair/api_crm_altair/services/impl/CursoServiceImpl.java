@@ -7,22 +7,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.altair.api_crm_altair.dtos.CursoRequestDto;
 import edu.altair.api_crm_altair.dtos.CursoResponseDto;
+import edu.altair.api_crm_altair.dtos.TitulacionResponseDto;
 import edu.altair.api_crm_altair.entities.Curso;
+import edu.altair.api_crm_altair.entities.Titulacion;
 import edu.altair.api_crm_altair.exceptions.CursoNotFoundException;
 import edu.altair.api_crm_altair.exceptions.DiminutivoAlreadyExistsException;
+import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
 import edu.altair.api_crm_altair.repositories.CursoRepository;
+import edu.altair.api_crm_altair.repositories.TitulacionRepository;
 import edu.altair.api_crm_altair.services.CursoService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class CursoServiceImpl implements CursoService 
 {
 	 private final CursoRepository cursoRepository;
-
-    // Inyección de dependencias por constructor
-    public CursoServiceImpl(CursoRepository cursoRepository) 
-    {
-        this.cursoRepository = cursoRepository;
-    }
+	 private final TitulacionRepository titRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -61,10 +62,14 @@ public class CursoServiceImpl implements CursoService
 			 throw new DiminutivoAlreadyExistsException("Ya existe un curso registrado con el diminutivo: " + dto.diminutivo());
 		 }
 		 
+		Titulacion titulacion = titRepository.findByCodigo(dto.codigoTitulacion())
+		            .orElseThrow(() -> new EntityNotFoundException("Titulacion no encontrada"));
+		 
        Curso nuevoCurso = new Curso(
                null,
 	       	   dto.diminutivo(),
-               dto.descripcion()
+               dto.descripcion(),
+               titulacion
        );
 
        Curso guardado = cursoRepository.save(nuevoCurso);
@@ -101,7 +106,13 @@ public class CursoServiceImpl implements CursoService
     private CursoResponseDto mapToResponseDto(Curso curso) {
         return new CursoResponseDto(
         		curso.getDiminutivo(),
-                curso.getDescripcion()
+                curso.getDescripcion(),
+                
+                new TitulacionResponseDto(
+                		curso.getTitulacion().getCodigo(),
+                		curso.getTitulacion().getDiminutivo(),
+                		curso.getTitulacion().getHorasTotales()
+                )
         );
     }
 }

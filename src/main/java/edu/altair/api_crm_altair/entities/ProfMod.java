@@ -28,7 +28,7 @@ import lombok.Setter;
                columnNames = {"idProfesor", "idModulo"}
            )
        })
-public class Prof_Imparte_Mod
+public class ProfMod
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

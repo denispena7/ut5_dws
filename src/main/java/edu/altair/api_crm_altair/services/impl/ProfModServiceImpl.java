@@ -12,20 +12,20 @@ import edu.altair.api_crm_altair.dtos.ProfModRequestDto;
 import edu.altair.api_crm_altair.dtos.ProfesorResponseDto;
 import edu.altair.api_crm_altair.dtos.ProfesoresModuloResponseDto;
 import edu.altair.api_crm_altair.entities.Modulo;
-import edu.altair.api_crm_altair.entities.Prof_Imparte_Mod;
+import edu.altair.api_crm_altair.entities.ProfMod;
 import edu.altair.api_crm_altair.entities.Profesor;
 import edu.altair.api_crm_altair.exceptions.EntityNotFoundException;
 import edu.altair.api_crm_altair.repositories.ModuloRepository;
-import edu.altair.api_crm_altair.repositories.Prof_Imparte_ModRepository;
+import edu.altair.api_crm_altair.repositories.ProfModRepository;
 import edu.altair.api_crm_altair.repositories.ProfesorRepository;
-import edu.altair.api_crm_altair.services.Prof_Imparte_ModService;
+import edu.altair.api_crm_altair.services.ProfModService;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class Prof_Imparte_ModServiceImpl implements Prof_Imparte_ModService
+public class ProfModServiceImpl implements ProfModService
 {
-	private final Prof_Imparte_ModRepository repositorio;
+	private final ProfModRepository repositorio;
     private final ProfesorRepository profesorRepository;
     private final ModuloRepository moduloRepository;
 
@@ -92,7 +92,7 @@ public class Prof_Imparte_ModServiceImpl implements Prof_Imparte_ModService
         }
 
         // Crear asociación
-        Prof_Imparte_Mod nuevaAsignacion = new Prof_Imparte_Mod(
+        ProfMod nuevaAsignacion = new ProfMod(
                 null,
                 profesor,
                 modulo
@@ -110,7 +110,7 @@ public class Prof_Imparte_ModServiceImpl implements Prof_Imparte_ModService
 
         if (!repositorio.existsById(id)) {
             throw new EntityNotFoundException(
-                    "Asignación no encontrada con el ID: " + id);
+                    "No se ha encontrado la asignación con ID: " + id);
         }
 
         repositorio.deleteById(id);

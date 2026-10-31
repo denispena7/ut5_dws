@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.altair.api_crm_altair.dtos.ModulosProfesorResponseDto;
 import edu.altair.api_crm_altair.dtos.ProfModRequestDto;
 import edu.altair.api_crm_altair.dtos.ProfesoresModuloResponseDto;
-import edu.altair.api_crm_altair.services.Prof_Imparte_ModService;
+import edu.altair.api_crm_altair.services.ProfModService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/modulo_profesor")
-public class Prof_Imparte_ModController 
+@RequestMapping("/api/modulo-profesor")
+public class ProfModController 
 {
-	private final Prof_Imparte_ModService service;
+	private final ProfModService service;
 	
     // Obtener los profesores que imparten un módulo
     @GetMapping("/modulo/{id}")
