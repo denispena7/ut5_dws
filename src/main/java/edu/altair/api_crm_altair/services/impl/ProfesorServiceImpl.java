@@ -112,6 +112,7 @@ public class ProfesorServiceImpl implements ProfesorService
                 profesor.getTelefono_personal(),
                
                 new DepartamentoResponseDto(
+                		profesor.getDepartamento().getIdDepartamento(),
                         profesor.getDepartamento().getCodigo(),
                         profesor.getDepartamento().getNombre(),
                         profesor.getDepartamento().getDescripcion(),

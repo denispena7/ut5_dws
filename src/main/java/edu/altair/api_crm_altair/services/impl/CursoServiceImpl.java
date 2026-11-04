@@ -104,10 +104,12 @@ public class CursoServiceImpl implements CursoService
     // Método auxiliar de mapeo de Entidad a DTO
     private CursoResponseDto mapToResponseDto(Curso curso) {
         return new CursoResponseDto(
+        		curso.getIdCurso(),
         		curso.getDiminutivo(),
                 curso.getDescripcion(),
                 
                 new TitulacionResponseDto(
+                		curso.getTitulacion().getIdTitulacion(),
                 		curso.getTitulacion().getCodigo(),
                 		curso.getTitulacion().getDiminutivo(),
                 		curso.getTitulacion().getHorasTotales()

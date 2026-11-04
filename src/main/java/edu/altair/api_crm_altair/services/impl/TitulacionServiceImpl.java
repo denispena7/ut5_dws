@@ -108,6 +108,7 @@ public class TitulacionServiceImpl implements TitulacionService
     // Método auxiliar de mapeo de Entidad a DTO
     private TitulacionResponseDto mapToResponseDto(Titulacion tit) {
         return new TitulacionResponseDto(
+        		tit.getIdTitulacion(),
         		tit.getCodigo(),
                 tit.getDiminutivo(),
                 tit.getHorasTotales()

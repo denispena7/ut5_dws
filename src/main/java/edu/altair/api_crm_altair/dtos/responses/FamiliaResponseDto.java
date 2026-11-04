@@ -1,6 +1,7 @@
 package edu.altair.api_crm_altair.dtos.responses;
 
 public record FamiliaResponseDto(
+		Long idFamilia,
 	    String nombre_madre,
 	    String nombre_padre,
 	    String apellidos_madre,

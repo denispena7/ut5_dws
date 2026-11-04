@@ -81,6 +81,7 @@ public class EstadoServiceImpl implements EstadoService
     // Método auxiliar de mapeo de Entidad a DTO
     private EstadoResponseDto mapToResponseDto(Estado est) {
         return new EstadoResponseDto(
+        		est.getIdEstado(),
         		est.getNombre(),
                 est.getDescripcion()
         );

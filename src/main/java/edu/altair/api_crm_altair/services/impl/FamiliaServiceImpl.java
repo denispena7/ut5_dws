@@ -116,6 +116,7 @@ public class FamiliaServiceImpl implements FamiliaService
     // Método auxiliar de mapeo de Entidad a DTO
     private FamiliaResponseDto mapToResponseDto(Familia fam) {
         return new FamiliaResponseDto(
+        		fam.getIdFamilia(),
         		fam.getNombre_madre(),
         		fam.getNombre_padre(),
                 fam.getApellidos_madre(),

@@ -113,10 +113,12 @@ public class ModCurServiceImpl implements ModCurService
     // Mapeo de Curso a CursoResponseDto
     private CursoResponseDto mapToCursoResponseDto(Curso curso) {
         return new CursoResponseDto(
+        		curso.getIdCurso(),
                 curso.getDiminutivo(),
                 curso.getDescripcion(),
                 
                 new TitulacionResponseDto(
+                		curso.getTitulacion().getIdTitulacion(),
                 		curso.getTitulacion().getCodigo(),
                 		curso.getTitulacion().getDiminutivo(),
                 		curso.getTitulacion().getHorasTotales()

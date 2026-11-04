@@ -16,6 +16,11 @@ import edu.altair.api_crm_altair.dtos.responses.MatriculaAlumnosResponseDto;
 import edu.altair.api_crm_altair.services.MatriculaService;
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  Controlador REST para la entidad Matricula, con sus metodos para gestionar las peticiones HTTP de matriculas
+ *  @author csi26-denis
+ *  @version 2026
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/matricula")
@@ -23,7 +28,11 @@ public class MatriculaController
 {
 	private final MatriculaService service;
 	
-    // Obtener una matrícula por su ID
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca una matricula y sus alumnos asociados por su identificador unico
+     * @param id es el identificador de la matricula a buscar
+     * @return ResponseEntity con el objeto de tipo MatriculaAlumnosResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/{id}")
     public ResponseEntity<MatriculaAlumnosResponseDto> obtenerMatricula(
             @PathVariable Long id) {
@@ -31,7 +40,11 @@ public class MatriculaController
         return ResponseEntity.ok(service.obtenerMatricula(id));
     }
 
-    // Crear una matrícula
+    /**
+     * Metodo para manejar la peticion HTTP POST que registra una nueva matricula en el sistema
+     * @param matricula es el objeto con los datos de entrada para registrar la matricula
+     * @return ResponseEntity con el objeto de tipo MatAlumnoResponseDto creado y codigo HTTP 201 Created
+     */
     @PostMapping
     public ResponseEntity<MatAlumnoResponseDto> crear(
             @RequestBody MatriculaRequestDto matricula) {
@@ -40,7 +53,11 @@ public class MatriculaController
                 .body(service.crear(matricula));
     }
 
-    // Eliminar una matrícula
+    /**
+     * Metodo para manejar la peticion HTTP DELETE que elimina una matricula del sistema por su identificador unico
+     * @param id es el identificador de la matricula a eliminar
+     * @return ResponseEntity con codigo HTTP 204 No Content
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
 

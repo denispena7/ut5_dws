@@ -123,6 +123,7 @@ public class ProfModServiceImpl implements ProfModService
 
         if (profesor.getDepartamento() != null) {
             departamentoDto = new DepartamentoResponseDto(
+            		profesor.getDepartamento().getIdDepartamento(),
                     profesor.getDepartamento().getCodigo(),
                     profesor.getDepartamento().getNombre(),
                     profesor.getDepartamento().getDescripcion(),

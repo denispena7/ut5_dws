@@ -130,6 +130,7 @@ public class AlumnoServiceImpl implements AlumnoService
            Familia familia = alumno.getFamilia();
 
            familiaDto = new FamiliaResponseDto(
+        		   familia.getIdFamilia(),
                    familia.getNombre_madre(),
                    familia.getNombre_padre(),
                    familia.getApellidos_madre(),
@@ -154,6 +155,7 @@ public class AlumnoServiceImpl implements AlumnoService
        }
 
        return new AlumnoResponseDto(
+    		   alumno.getIdAlumno(),
                alumno.getNombre(),
                alumno.getApellidos(),
                alumno.getDni(),

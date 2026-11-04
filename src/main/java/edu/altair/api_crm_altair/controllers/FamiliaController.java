@@ -18,6 +18,11 @@ import edu.altair.api_crm_altair.dtos.responses.FamiliaResponseDto;
 import edu.altair.api_crm_altair.services.FamiliaService;
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  Controlador REST para la entidad Familia, con sus metodos para gestionar las peticiones HTTP de familias
+ *  @author csi26-denis
+ *  @version 2026
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/familia")
@@ -25,19 +30,30 @@ public class FamiliaController
 {
 	private final FamiliaService familiaService;
     
-    // 1. READ ALL - GET /api/v1/familia
+    /**
+     * Metodo para manejar la peticion HTTP GET que obtiene todas las familias registradas
+     * @return ResponseEntity con la lista de objetos de tipo FamiliaResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping
     public ResponseEntity<List<FamiliaResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(familiaService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/v1/familia/{id}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca una familia por su identificador unico
+     * @param id es el identificador de la familia a buscar
+     * @return ResponseEntity con el objeto de tipo FamiliaResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/{id}")
     public ResponseEntity<FamiliaResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(familiaService.obtenerPorId(id)); // HTTP 200 OK
     }
 
-    // 3. CREATE - POST /api/v1/familia
+    /**
+     * Metodo para manejar la peticion HTTP POST que registra una nueva familia en el sistema
+     * @param dto es el objeto con los datos de entrada para registrar a la familia
+     * @return ResponseEntity con el objeto de tipo FamiliaResponseDto creado y codigo HTTP 201 Created
+     */
     @PostMapping
     public ResponseEntity<FamiliaResponseDto> crear(@RequestBody FamiliaRequestDto dto) {
         FamiliaResponseDto creado = familiaService.crear(dto);
@@ -46,7 +62,12 @@ public class FamiliaController
                 .body(creado);
     }
 
-    // 4. UPDATE - PUT /api/v1/familia/{id}
+    /**
+     * Metodo para manejar la peticion HTTP PUT que actualiza los datos de una familia existente
+     * @param id es el identificador de la familia a actualizar
+     * @param requestDto es el objeto con los nuevos datos para modificar a la familia
+     * @return ResponseEntity con el objeto de tipo FamiliaResponseDto actualizado y codigo HTTP 200 OK
+     */
     @PutMapping("/{id}")
     public ResponseEntity<FamiliaResponseDto> actualizar(
             @PathVariable Long id,
@@ -55,7 +76,11 @@ public class FamiliaController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 5. DELETE - DELETE /api/v1/familia/{id}
+    /**
+     * Metodo para manejar la peticion HTTP DELETE que elimina una familia del sistema por su identificador unico
+     * @param id es el identificador de la familia a eliminar
+     * @return ResponseEntity con codigo HTTP 204 No Content
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         familiaService.eliminar(id);

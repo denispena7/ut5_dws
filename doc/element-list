@@ -1,0 +1,9 @@
+edu.altair.api_crm_altair
+edu.altair.api_crm_altair.controllers
+edu.altair.api_crm_altair.dtos.requests
+edu.altair.api_crm_altair.dtos.responses
+edu.altair.api_crm_altair.entities
+edu.altair.api_crm_altair.exceptions
+edu.altair.api_crm_altair.repositories
+edu.altair.api_crm_altair.services
+edu.altair.api_crm_altair.services.impl

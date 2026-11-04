@@ -111,6 +111,7 @@ public class MatriculaServiceImpl implements MatriculaService
     private AlumnoResponseDto mapToAlumnoResponseDto(Alumno alumno) {
         // Reutiliza aquí el mapeo de AlumnoServiceImpl.
         return new AlumnoResponseDto(
+        		alumno.getIdAlumno(),
                 alumno.getNombre(),
                 alumno.getApellidos(),
                 alumno.getDni(),
@@ -128,6 +129,7 @@ public class MatriculaServiceImpl implements MatriculaService
     private EstadoResponseDto mapToEstadoResponseDto(Estado estado) {
         // Ajustar los campos al constructor real de EstadoResponseDto.
         return new EstadoResponseDto(
+        		estado.getIdEstado(),
                 estado.getNombre(),
                 estado.getDescripcion()
         );
@@ -153,6 +155,7 @@ public class MatriculaServiceImpl implements MatriculaService
         }
 
         return new FamiliaResponseDto(
+        		familia.getIdFamilia(),
                 familia.getNombre_madre(),
                 familia.getNombre_padre(),
                 familia.getApellidos_madre(),

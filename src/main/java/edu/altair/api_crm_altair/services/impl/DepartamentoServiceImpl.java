@@ -101,6 +101,7 @@ public class DepartamentoServiceImpl implements DepartamentoService
     // Método auxiliar de mapeo de Entidad a DTO
     private DepartamentoResponseDto mapToResponseDto(Departamento dep) {
         return new DepartamentoResponseDto(
+        		dep.getIdDepartamento(),
         		dep.getCodigo(),
                 dep.getNombre(),
                 dep.getDescripcion(),

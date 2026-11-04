@@ -18,6 +18,11 @@ import edu.altair.api_crm_altair.dtos.responses.TitulacionResponseDto;
 import edu.altair.api_crm_altair.services.TitulacionService;
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  Controlador REST para la entidad Titulacion, con sus metodos para gestionar las peticiones HTTP de titulaciones
+ *  @author csi26-denis
+ *  @version 2026
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/titulacion")
@@ -25,31 +30,50 @@ public class TitulacionController
 {
 	private final TitulacionService titulacionService;
     
- // 1. READ ALL - GET /api/v1/titulacion
+    /**
+     * Metodo para manejar la peticion HTTP GET que obtiene todas las titulaciones registradas
+     * @return ResponseEntity con la lista de objetos de tipo TitulacionResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping
     public ResponseEntity<List<TitulacionResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(titulacionService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/v1/titulacion/{id}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca una titulacion por su identificador unico
+     * @param id es el identificador de la titulacion a buscar
+     * @return ResponseEntity con el objeto de tipo TitulacionResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/{id}")
     public ResponseEntity<TitulacionResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(titulacionService.obtenerPorId(id)); // HTTP 200 OK
     }
     
-    // 3. READ BY CODIGO - GET /api/v1/titulacion/{cod}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca una titulacion por su codigo
+     * @param cod es el codigo por el que buscar la titulacion
+     * @return ResponseEntity con el objeto de tipo TitulacionResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/cod/{cod}")
     public ResponseEntity<TitulacionResponseDto> obtenerPorCodigo(@PathVariable int cod) {
         return ResponseEntity.ok(titulacionService.obtenerPorCodigo(cod)); // HTTP 200 OK
     }
     
-    // 4. READ BY CODIGO - GET /api/v1/titulacion/{diminutivo}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca una titulacion por su diminutivo
+     * @param diminutivo es el diminutivo por el que buscar la titulacion
+     * @return ResponseEntity con el objeto de tipo TitulacionResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/dim/{diminutivo}")
     public ResponseEntity<TitulacionResponseDto> obtenerPorDiminutivo(@PathVariable String diminutivo) {
         return ResponseEntity.ok(titulacionService.obtenerPorDiminutivo(diminutivo)); // HTTP 200 OK
     }
 
-    // 5. CREATE - POST /api/v1/titulacion
+    /**
+     * Metodo para manejar la peticion HTTP POST que registra una nueva titulacion en el sistema
+     * @param requestDto es el objeto con los datos de entrada para registrar a la titulacion
+     * @return ResponseEntity con el objeto de tipo TitulacionResponseDto creado y codigo HTTP 201 Created
+     */
     @PostMapping
     public ResponseEntity<TitulacionResponseDto> crear(@RequestBody TitulacionRequestDto requestDto) {
         TitulacionResponseDto creado = titulacionService.crear(requestDto);
@@ -58,7 +82,12 @@ public class TitulacionController
                 .body(creado);
     }
 
-    // 6. UPDATE - PUT /api/v1/titulacion/{id}
+    /**
+     * Metodo para manejar la peticion HTTP PUT que actualiza los datos de una titulacion existente
+     * @param id es el identificador de la titulacion a actualizar
+     * @param requestDto es el objeto con los nuevos datos para modificar a la titulacion
+     * @return ResponseEntity con el objeto de tipo TitulacionResponseDto actualizado y codigo HTTP 200 OK
+     */
     @PutMapping("/{id}")
     public ResponseEntity<TitulacionResponseDto> actualizar(
             @PathVariable Long id,
@@ -67,10 +96,15 @@ public class TitulacionController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 7. DELETE - DELETE /api/v1/titulacion/{id}
+    /**
+     * Metodo para manejar la peticion HTTP DELETE que elimina una titulacion del sistema por su identificador unico
+     * @param id es el identificador de la titulacion a eliminar
+     * @return ResponseEntity con codigo HTTP 204 No Content
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         titulacionService.eliminar(id);
         return ResponseEntity.noContent().build(); // HTTP 204 No Content
     }
 }
+

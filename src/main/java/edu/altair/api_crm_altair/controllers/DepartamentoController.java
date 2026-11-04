@@ -18,6 +18,11 @@ import edu.altair.api_crm_altair.dtos.responses.DepartamentoResponseDto;
 import edu.altair.api_crm_altair.services.DepartamentoService;
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  Controlador REST para la entidad Departamento, con sus metodos para gestionar las peticiones HTTP de departamentos
+ *  @author csi26-denis
+ *  @version 2026
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/departamento")
@@ -25,24 +30,40 @@ public class DepartamentoController
 {
 	private final DepartamentoService departamentoService;
 
-    // 1. READ ALL - GET /api/v1/departamento
+    /**
+     * Metodo para manejar la peticion HTTP GET que obtiene todos los departamentos registrados
+     * @return ResponseEntity con la lista de objetos de tipo DepartamentoResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping
     public ResponseEntity<List<DepartamentoResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(departamentoService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/v1/departamento/{id}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca un departamento por su identificador unico
+     * @param id es el identificador del departamento a buscar
+     * @return ResponseEntity con el objeto de tipo DepartamentoResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/{id}")
     public ResponseEntity<DepartamentoResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(departamentoService.obtenerPorId(id)); // HTTP 200 OK
     }
-    // 3. READ BY CODIGO - GET /api/v1/departamento/cod/{cod}
+
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca un departamento por su codigo
+     * @param cod es el codigo por el que buscar el departamento
+     * @return ResponseEntity con el objeto de tipo DepartamentoResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("cod/{cod}")
     public ResponseEntity<DepartamentoResponseDto> obtenerPorCodigo(@PathVariable int cod) {
         return ResponseEntity.ok(departamentoService.obtenerPorCodigo(cod)); // HTTP 200 OK
     }
 
-    // 4. CREATE - POST /api/v1/departamento
+    /**
+     * Metodo para manejar la peticion HTTP POST que registra un nuevo departamento en el sistema
+     * @param requestDto es el objeto con los datos de entrada para registrar al departamento
+     * @return ResponseEntity con el objeto de tipo DepartamentoResponseDto creado y codigo HTTP 201 Created
+     */
     @PostMapping
     public ResponseEntity<DepartamentoResponseDto> crear(@RequestBody DepartamentoRequestDto requestDto) {
         DepartamentoResponseDto creado = departamentoService.crear(requestDto);
@@ -51,7 +72,12 @@ public class DepartamentoController
                 .body(creado);
     }
 
-    // 5. UPDATE - PUT /api/v1/departamento/{id}
+    /**
+     * Metodo para manejar la peticion HTTP PUT que actualiza los datos de un departamento existente
+     * @param id es el identificador del departamento a actualizar
+     * @param requestDto es el objeto con los nuevos datos para modificar al departamento
+     * @return ResponseEntity con el objeto de tipo DepartamentoResponseDto actualizado y codigo HTTP 200 OK
+     */
     @PutMapping("/{id}")
     public ResponseEntity<DepartamentoResponseDto> actualizar(
             @PathVariable Long id,
@@ -60,7 +86,11 @@ public class DepartamentoController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 6. DELETE - DELETE /api/v1/departamento/{id}
+    /**
+     * Metodo para manejar la peticion HTTP DELETE que elimina un departamento del sistema por su identificador unico
+     * @param id es el identificador del departamento a eliminar
+     * @return ResponseEntity con codigo HTTP 204 No Content
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         departamentoService.eliminar(id);

@@ -18,6 +18,11 @@ import edu.altair.api_crm_altair.dtos.responses.ModuloResponseDto;
 import edu.altair.api_crm_altair.services.ModuloService;
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  Controlador REST para la entidad Modulo, con sus metodos para gestionar las peticiones HTTP de modulos
+ *  @author csi26-denis
+ *  @version 2026
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/modulo")
@@ -25,31 +30,50 @@ public class ModuloController
 {
 	private final ModuloService moduloService;
 
-    // 1. READ ALL - GET /api/v1/modulo
+    /**
+     * Metodo para manejar la peticion HTTP GET que obtiene todos los modulos registrados
+     * @return ResponseEntity con la lista de objetos de tipo ModuloResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping
     public ResponseEntity<List<ModuloResponseDto>> obtenerTodos() {
         return ResponseEntity.ok(moduloService.obtenerTodos()); // HTTP 200 OK
     }
 
-    // 2. READ BY ID - GET /api/v1/modulo/{id}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca un modulo por su identificador unico
+     * @param id es el identificador del modulo a buscar
+     * @return ResponseEntity con el objeto de tipo ModuloResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ModuloResponseDto> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(moduloService.obtenerPorId(id)); // HTTP 200 OK
     }
     
-    // 3. READ BY CODIGO - GET /api/v1/modulo/{cod}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca un modulo por su codigo
+     * @param cod es el codigo por el que buscar el modulo
+     * @return ResponseEntity con el objeto de tipo ModuloResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/cod/{cod}")
     public ResponseEntity<ModuloResponseDto> obtenerPorCodigo(@PathVariable int cod) {
         return ResponseEntity.ok(moduloService.obtenerPorCodigo(cod)); // HTTP 200 OK
     }
     
-    // 4. READ BY CODIGO - GET /api/v1/modulo/{diminutivo}
+    /**
+     * Metodo para manejar la peticion HTTP GET que busca un modulo por su diminutivo
+     * @param diminutivo es el diminutivo por el que buscar el modulo
+     * @return ResponseEntity con el objeto de tipo ModuloResponseDto y codigo HTTP 200 OK
+     */
     @GetMapping("/dim/{diminutivo}")
     public ResponseEntity<ModuloResponseDto> obtenerPorDiminutivo(@PathVariable String diminutivo) {
         return ResponseEntity.ok(moduloService.obtenerPorDiminutivo(diminutivo)); // HTTP 200 OK
     }
 
-    // 5. CREATE - POST /api/v1/modulo
+    /**
+     * Metodo para manejar la peticion HTTP POST que registra un nuevo modulo en el sistema
+     * @param requestDto es el objeto con los datos de entrada para registrar al modulo
+     * @return ResponseEntity con el objeto de tipo ModuloResponseDto creado y codigo HTTP 201 Created
+     */
     @PostMapping
     public ResponseEntity<ModuloResponseDto> crear(@RequestBody ModuloRequestDto requestDto) {
         ModuloResponseDto creado = moduloService.crear(requestDto);
@@ -58,7 +82,12 @@ public class ModuloController
                 .body(creado);
     }
 
-    // 6. UPDATE - PUT /api/v1/modulo/{id}
+    /**
+     * Metodo para manejar la peticion HTTP PUT que actualiza los datos de un modulo existente
+     * @param id es el identificador del modulo a actualizar
+     * @param requestDto es el objeto con los nuevos datos para modificar al modulo
+     * @return ResponseEntity con el objeto de tipo ModuloResponseDto actualizado y codigo HTTP 200 OK
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ModuloResponseDto> actualizar(
             @PathVariable Long id,
@@ -67,7 +96,11 @@ public class ModuloController
         return ResponseEntity.ok(actualizado); // HTTP 200 OK
     }
 
-    // 7. DELETE - DELETE /api/v1/modulo/{id}
+    /**
+     * Metodo para manejar la peticion HTTP DELETE que elimina un modulo del sistema por su identificador unico
+     * @param id es el identificador del modulo a eliminar
+     * @return ResponseEntity con codigo HTTP 204 No Content
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         moduloService.eliminar(id);
